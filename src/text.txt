@@ -1,0 +1,372 @@
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
+import { Modal, Form, Input, Button, Radio, Upload, Divider } from 'antd';
+import './FormComponent.css';
+import { CloudUploadOutlined } from '@ant-design/icons';
+
+const FormComponent = ({ addFormDataToList, visible, onCancel }) => {
+  const [form] = Form.useForm();
+
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const handleNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const handleSubmit = (values) => {
+    const { email, returnsLastYear } = values;
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const isValidEmail = emailPattern.test(email);
+
+    if (isValidEmail) {
+      addFormDataToList(values);
+      console.table(values);
+      form.resetFields();
+    }
+  };
+
+  return (
+    <div className="form-container">
+      <Modal
+        visible={visible}
+        title="Create Form Details"
+        onCancel={onCancel}
+        footer={null}
+        width={600}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleSubmit}
+          className="from-content"
+        >
+          {/* email */}
+          <Form.Item
+            label="Email"
+            name="email"
+            help="example@example.com"
+            validateStatus="success"
+            rules={[
+              { type: 'email', message: 'Please enter a valid email address' },
+              { required: true, message: 'Please input your email!' },
+            ]}
+            className="form__email"
+          >
+            <Input id="email" />
+          </Form.Item>
+
+          <Form.Item
+            label="Did you file the returns last year?"
+            name="returnsLastYear"
+            rules={[{ message: 'Please select an option' }]}
+          >
+            <Radio.Group>
+              <Radio value="yes">Yes</Radio>
+              <br />
+              <Radio value="no">No</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            label="File Upload"
+            name="fileUpload"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => e.fileList}
+            rules={[{ required: true, message: 'Please upload a file' }]}
+            className="from-upload"
+          >
+            <Upload.Dragger name="files" multiple={false}>
+              <p className="ant-upload-drag-icon">
+                <CloudUploadOutlined style={{ color: 'gray' }} />
+              </p>
+              <p className="ant-upload-text">Browser Files</p>
+              <p className="ant-upload-hint">Drag and drop files here</p>
+            </Upload.Dragger>
+          </Form.Item>
+
+          <Form.Item
+            label="Was the S - Corp incorporated in 2022?"
+            name="incorporatedIn2022"
+            rules={[{ message: 'Please select an option' }]}
+            className="from__radio"
+          >
+            <Radio.Group>
+              <Radio value="yes">Yes</Radio>
+              <br />
+              <Radio value="no">No</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            label="Please Upload the Incorporation Documents"
+            name="incorporationDocs"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => e.fileList}
+            rules={[
+              {
+                required: true,
+                message: 'Please upload incorporation documents',
+              },
+            ]}
+            className="from-upload"
+          >
+            <Upload.Dragger name="files" multiple={false}>
+              <p className="ant-upload-drag-icon">
+                <CloudUploadOutlined style={{ color: 'gray' }} />
+              </p>
+              <p className="ant-upload-text">Browser Files</p>
+              <p className="ant-upload-hint">Drag and drop files here</p>
+            </Upload.Dragger>
+          </Form.Item>
+
+          <Form.Item
+            label="Was there any change in Ownership Structure in 2022?"
+            name="ownershipChange2022"
+            rules={[{ message: 'Please select an option' }]}
+            className="from__radio"
+          >
+            <Radio.Group>
+              <Radio value="yes">Yes</Radio>
+              <br />
+              <Radio value="no">No</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            label="Upload latest Shareholding pattern"
+            name="shareholdingPattern"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => e.fileList}
+            rules={[
+              { required: true, message: 'Please upload shareholding pattern' },
+            ]}
+            className="from-upload"
+            style={{ color: 'gray' }}
+          >
+            <Upload.Dragger
+              name="files"
+              multiple={false}
+              className="from-uploads"
+            >
+              <p className="ant-upload-drag-icon">
+                <CloudUploadOutlined style={{ color: 'gray' }} />
+              </p>
+              <p className="ant-upload-text">Browser Files</p>
+              <p className="ant-upload-hint">Drag and drop files here</p>
+            </Upload.Dragger>
+          </Form.Item>
+
+          <Divider plain />
+
+          <Form.Item className="from__button">
+            <Button htmlType="submit" className="from__button-save">
+              Save
+            </Button>
+
+            <Button htmlType="submit" className="from__button-next">
+              Next
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+    </div>
+  );
+};
+
+export default FormComponent;
+
+// import React, { useState } from 'react';
+// import { Form, Input, Button, Radio, Upload, Divider } from 'antd';
+// import './FormComponent.css';
+// import { CloudUploadOutlined } from '@ant-design/icons';
+
+// const FormComponent = ({ fromLists, setFromLists, addFormDataToList }) => {
+//   const [form] = Form.useForm();
+
+//   const handleSubmit = (values) => {
+//     const { email, returnsLastYear } = values;
+
+//     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+//     const isValidEmail = emailPattern.test(email);
+
+//     // if (isValidEmail) {
+//     //   console.log('Valid email:', email);
+//     // } else {
+//     //   console.log('Invalid email:', email);
+//     // }
+
+//     if (isValidEmail) {
+//       addFormDataToList(values);
+//       console.log(values);
+//     }
+//   };
+
+//   return (
+//     <div className="form-container">
+//       <Form
+//         form={form}
+//         layout="vertical"
+//         onFinish={handleSubmit}
+//         className="from-content"
+//       >
+//         {/* email */}
+//         <Form.Item
+//           label="Email"
+//           name="email"
+//           help="example@example.com"
+//           validateStatus="success"
+//           rules={[
+//             { type: 'email', message: 'Please enter a valid email address' },
+//             { required: true, message: 'Please input your email!' },
+//           ]}
+//           className="form__email"
+//         >
+//           <Input id="email" />
+//         </Form.Item>
+
+//         <Form.Item
+//           label="Did you file the returns last year?"
+//           name="returnsLastYear"
+//           rules={[{ message: 'Please select an option' }]}
+//         >
+//           <Radio.Group>
+//             <Radio value="yes">Yes</Radio>
+//             <br />
+//             <Radio value="no">No</Radio>
+//           </Radio.Group>
+//         </Form.Item>
+
+//         <Form.Item
+//           label="File Upload"
+//           name="fileUpload"
+//           valuePropName="fileList"
+//           getValueFromEvent={(e) => e.fileList}
+//           rules={[{ required: true, message: 'Please upload a file' }]}
+//           className="from-upload"
+//         >
+//           <Upload.Dragger name="files" multiple={false}>
+//             <p className="ant-upload-drag-icon">
+//               <CloudUploadOutlined style={{ color: 'gray' }} />
+//             </p>
+//             <p className="ant-upload-text">Browser Files</p>
+//             <p className="ant-upload-hint">Drag and drop files here</p>
+//           </Upload.Dragger>
+//         </Form.Item>
+
+//         <Form.Item
+//           label="Was the S - Corp incorporated in 2022?"
+//           name="incorporatedIn2022"
+//           rules={[{ message: 'Please select an option' }]}
+//           className="from__radio"
+//         >
+//           <Radio.Group>
+//             <Radio value="yes">Yes</Radio>
+//             <br />
+//             <Radio value="no">No</Radio>
+//           </Radio.Group>
+//         </Form.Item>
+
+//         <Form.Item
+//           label="Please Upload the Incorporation Documents"
+//           name="incorporationDocs"
+//           valuePropName="fileList"
+//           getValueFromEvent={(e) => e.fileList}
+//           rules={[
+//             {
+//               required: true,
+//               message: 'Please upload incorporation documents',
+//             },
+//           ]}
+//           className="from-upload"
+//         >
+//           <Upload.Dragger name="files" multiple={false}>
+//             <p className="ant-upload-drag-icon">
+//               <CloudUploadOutlined style={{ color: 'gray' }} />
+//             </p>
+//             <p className="ant-upload-text">Browser Files</p>
+//             <p className="ant-upload-hint">Drag and drop files here</p>
+//           </Upload.Dragger>
+//         </Form.Item>
+
+//         <Form.Item
+//           label="Was there any change in Ownership Structure in 2022?"
+//           name="ownershipChange2022"
+//           rules={[{ message: 'Please select an option' }]}
+//           className="from__radio"
+//         >
+//           <Radio.Group>
+//             <Radio value="yes">Yes</Radio>
+//             <br />
+//             <Radio value="no">No</Radio>
+//           </Radio.Group>
+//         </Form.Item>
+
+//         <Form.Item
+//           label="Upload latest Shareholding pattern"
+//           name="shareholdingPattern"
+//           valuePropName="fileList"
+//           getValueFromEvent={(e) => e.fileList}
+//           rules={[
+//             { required: true, message: 'Please upload shareholding pattern' },
+//           ]}
+//           className="from-upload"
+//           style={{ color: 'gray' }}
+//         >
+//           <Upload.Dragger
+//             name="files"
+//             multiple={false}
+//             className="from-uploads"
+//           >
+//             <p className="ant-upload-drag-icon">
+//               <CloudUploadOutlined style={{ color: 'gray' }} />
+//             </p>
+//             <p className="ant-upload-text">Browser Files</p>
+//             <p className="ant-upload-hint">Drag and drop files here</p>
+//           </Upload.Dragger>
+//         </Form.Item>
+
+//         <Divider plain />
+
+//         <Form.Item className="from__button">
+//           <Button htmlType="submit" className="from__button-save">
+//             Save
+//           </Button>
+
+//           <Button htmlType="submit" className="from__button-next">
+//             Next
+//           </Button>
+//         </Form.Item>
+//       </Form>
+//     </div>
+//   );
+// };
+
+// export default FormComponent;
+
+
+ After Clicking the Next Butto in that Moadal Only it go next Modal
+ which is contenting following below
+ 1. Was there any following transaction in 2022?
+    a. Input Checkbox field "Capital Infusion"
+    b. Input Checkbox field "Capital Withdrawal"
+    c. Input Checkbox field "Related Party Transaction"
+   for this Upload Field
+   Upload documents for the same field:
+     Input for Upload Field
+ 2. Please upload the following documents:
+      a. Input Checkbox field "Bank Statements"
+      b. Input Checkbox field "Credit Card Statements"
+      c. Input Checkbox field "Form 10991"
+      e. Input Checkbox field "Form 940 / 941"
+      d. Input Checkbox field "EIN Certificate"
+      f. Input Checkbox field "IRS Acceptance Letter of S-Corp"
+      g. Input Checkbox field "Financials (if prepared)"
+   for this Upload Field
+   Upload documents for the same field:
+     Input for Upload Field
+3.  Please complete the payment. We will prepare the draft tax return within 48 hours!
+     Input Checkbox field with logo and Company Name "abc"    and  price $349
+divider
+4. Label "Enter Coupon" with input field with Apply button  and  Total Amount $0.00
+5. Back button and Save button and Submit button

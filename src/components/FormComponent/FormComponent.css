@@ -1,0 +1,131 @@
+.form-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* border: 1px solid red; */
+}
+
+.from-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 1rem;
+
+  /* border: 1px solid red; */
+}
+
+.form__email,
+.from-upload {
+  width: 500px;
+  margin-bottom: 3rem;
+}
+
+.from__radio {
+  margin-bottom: 3rem;
+}
+
+.from__checkboxs {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.from__payment {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.from__payment-text {
+  margin-right: 15rem;
+}
+
+.form__coupon {
+  width: 100%;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.from__coupon-input {
+  width: 100%;
+  min-width: 400px;
+  height: 40px;
+  margin-right: 0.2rem;
+}
+
+.from__button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+}
+.from__button-save,
+.from__button-next,
+.from__button-back,
+.from__button-submit,
+.from__button-apply {
+  color: #fff;
+  background-color: #55ba54;
+  font-size: 1.2rem;
+  width: 100px;
+  height: 40px;
+
+  margin-right: 1rem;
+}
+
+.from__button-apply {
+  background-color: #4c71fb;
+}
+
+@media screen and (max-width: 768px) {
+  .form__email,
+  .from-upload {
+    width: 100%;
+  }
+  .from__button {
+    justify-content: center;
+  }
+  .from__coupon-input {
+    min-width: 240px;
+    margin-bottom: 1rem;
+  }
+  .form__coupon {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .from__button-save,
+  .from__button-next,
+  .from__button-back,
+  .from__button-submit,
+  .from__button-apply {
+    color: #fff;
+    background-color: #55ba54;
+    font-size: 1.2rem;
+    width: 200px;
+    height: 40px;
+
+    margin-right: 0rem;
+  }
+
+  .from__payment-text {
+    margin-right: 1rem;
+  }
+  .from__coupon-amount {
+    text-align: center;
+  }
+}
