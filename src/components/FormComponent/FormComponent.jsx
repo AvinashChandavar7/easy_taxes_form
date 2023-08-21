@@ -93,7 +93,12 @@ const FormComponent = ({ addFormDataToList, visible, onCancel }) => {
             name="transactionDocs"
             valuePropName="fileList"
             getValueFromEvent={(e) => e.fileList}
-            rules={[{ required: true, message: 'Please upload documents' }]}
+            rules={[
+              {
+                //  required: true,
+                message: 'Please upload documents',
+              },
+            ]}
             className="from-upload"
           >
             <FileUploadInputField name="files" multiple={true} />
@@ -119,7 +124,7 @@ const FormComponent = ({ addFormDataToList, visible, onCancel }) => {
             getValueFromEvent={(e) => e.fileList}
             rules={[
               {
-                required: true,
+                // required: true,
                 message: 'Please upload incorporation documents',
               },
             ]}
@@ -147,7 +152,10 @@ const FormComponent = ({ addFormDataToList, visible, onCancel }) => {
             valuePropName="fileList"
             getValueFromEvent={(e) => e.fileList}
             rules={[
-              { required: true, message: 'Please upload shareholding pattern' },
+              {
+                //  required: true,
+                message: 'Please upload shareholding pattern',
+              },
             ]}
             className="from-upload"
             style={{ color: 'gray' }}
@@ -197,7 +205,10 @@ const FormComponent = ({ addFormDataToList, visible, onCancel }) => {
                   valuePropName="fileList"
                   getValueFromEvent={(e) => e.fileList}
                   rules={[
-                    { required: true, message: 'Please upload documents' },
+                    {
+                      // required: true,
+                      message: 'Please upload documents',
+                    },
                   ]}
                   className="from-upload"
                 >
@@ -235,7 +246,10 @@ const FormComponent = ({ addFormDataToList, visible, onCancel }) => {
                   valuePropName="fileList"
                   getValueFromEvent={(e) => e.fileList}
                   rules={[
-                    { required: true, message: 'Please upload documents' },
+                    {
+                      // required: true,
+                      message: 'Please upload documents',
+                    },
                   ]}
                   className="from-upload"
                 >
